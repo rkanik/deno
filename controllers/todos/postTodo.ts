@@ -11,9 +11,7 @@ export const postTodo = async (ctx: Context) => {
     const parsed = zPostTodo.safeParse(body);
     if (!parsed.success) {
       ctx.response.status = 422;
-      ctx.response.body = {
-        error: z.treeifyError(parsed.error),
-      };
+      ctx.response.body = z.treeifyError(parsed.error);
       return;
     }
 

@@ -1,11 +1,12 @@
 {
   "tasks": {
-    "dev": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv --watch main.ts",
-    "start": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv main.ts",
+    "dev": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv --allow-ffi --watch main.ts",
+    "start": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv --allow-ffi main.ts",
     "test": "deno run --allow-net test_api.ts"
   },
   "imports": {
     "@/": "./",
+    "bcrypt": "jsr:@felix/bcrypt@^1.0.5",
     "zod": "jsr:@zod/zod@^4.0.10",
     "oak": "jsr:@oak/oak@^17.1.5",
     "@std/assert": "jsr:@std/assert@1"

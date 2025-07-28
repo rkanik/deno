@@ -1,6 +1,8 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@denosaurs/plug@^1.0.6": "1.1.0",
+    "jsr:@felix/bcrypt@^1.0.5": "1.0.5",
     "jsr:@oak/commons@1": "1.0.0",
     "jsr:@oak/oak@^17.1.5": "17.1.5",
     "jsr:@std/assert@1": "1.0.13",
@@ -8,16 +10,34 @@
     "jsr:@std/crypto@1": "1.0.3",
     "jsr:@std/encoding@1": "1.0.10",
     "jsr:@std/encoding@^1.0.5": "1.0.10",
+    "jsr:@std/fmt@1": "1.0.8",
+    "jsr:@std/fs@1": "1.0.19",
     "jsr:@std/http@1": "1.0.9",
     "jsr:@std/internal@^1.0.6": "1.0.10",
     "jsr:@std/internal@^1.0.9": "1.0.10",
     "jsr:@std/media-types@1": "1.0.3",
     "jsr:@std/path@1": "1.1.1",
+    "jsr:@std/path@^1.1.1": "1.1.1",
     "jsr:@zod/zod@^4.0.10": "4.0.10",
     "npm:@types/node@*": "22.10.1",
     "npm:path-to-regexp@^6.3.0": "6.3.0"
   },
   "jsr": {
+    "@denosaurs/plug@1.1.0": {
+      "integrity": "eb2f0b7546c7bca2000d8b0282c54d50d91cf6d75cb26a80df25a6de8c4bc044",
+      "dependencies": [
+        "jsr:@std/encoding@1",
+        "jsr:@std/fmt",
+        "jsr:@std/fs",
+        "jsr:@std/path@1"
+      ]
+    },
+    "@felix/bcrypt@1.0.5": {
+      "integrity": "c8312e10cfda0e34c06c0d906667a0c602b472b7c64c75cfdcb44b934b885836",
+      "dependencies": [
+        "jsr:@denosaurs/plug"
+      ]
+    },
     "@oak/commons@1.0.0": {
       "integrity": "49805b55603c3627a9d6235c0655aa2b6222d3036b3a13ff0380c16368f607ac",
       "dependencies": [
@@ -37,7 +57,7 @@
         "jsr:@std/bytes",
         "jsr:@std/http",
         "jsr:@std/media-types",
-        "jsr:@std/path",
+        "jsr:@std/path@1",
         "npm:path-to-regexp"
       ]
     },
@@ -55,6 +75,16 @@
     },
     "@std/encoding@1.0.10": {
       "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
+    },
+    "@std/fmt@1.0.8": {
+      "integrity": "71e1fc498787e4434d213647a6e43e794af4fd393ef8f52062246e06f7e372b7"
+    },
+    "@std/fs@1.0.19": {
+      "integrity": "051968c2b1eae4d2ea9f79a08a3845740ef6af10356aff43d3e2ef11ed09fb06",
+      "dependencies": [
+        "jsr:@std/internal@^1.0.9",
+        "jsr:@std/path@^1.1.1"
+      ]
     },
     "@std/http@1.0.9": {
       "integrity": "d409fc319a5e8d4a154e576c758752e9700282d74f31357a12fec6420f9ecb6c",
@@ -240,6 +270,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@felix/bcrypt@^1.0.5",
       "jsr:@oak/oak@^17.1.5",
       "jsr:@std/assert@1",
       "jsr:@zod/zod@^4.0.10"
