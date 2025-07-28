@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv --allow-ffi --watch main.ts",
-    "start": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv --allow-ffi main.ts",
+    "dev": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv --allow-ffi --unstable-ffi --watch main.ts",
+    "start": "deno run --allow-net --allow-read --allow-write --allow-env --unstable-kv --allow-ffi --unstable-ffi main.ts",
     "test": "deno run --allow-net test_api.ts"
   },
   "imports": {
