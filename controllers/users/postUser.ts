@@ -3,7 +3,7 @@ import { TZPostUser, zPostUser } from "./zod.ts";
 import { z } from "zod";
 import { getId } from "@/utils/getId.ts";
 import { kv } from "@/kv.ts";
-import { hash } from "bcrypt";
+// import { hash } from "bcrypt";
 import { TUser } from "./types.ts";
 
 export const postUser = async (ctx: Context) => {
@@ -17,12 +17,12 @@ export const postUser = async (ctx: Context) => {
 
   const id = await getId();
   const data = parsed.data as TZPostUser;
-  const password = await hash(data.password);
+  //   const password = await hash(data.password);
 
   const user: TUser = {
     id,
     ...data,
-    password,
+    //  password,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
