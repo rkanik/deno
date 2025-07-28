@@ -1,14 +1,45 @@
-GET http://localhost:8000/todos HTTP/1.1
+GET http://localhost:8000/api/v1/todos HTTP/1.1
 
 ###
 
-GET http://localhost:8000/todos/1 HTTP/1.1
+GET http://localhost:8000/api/v1/todos/2605debf-60df-4bdc-9f22-c0fb4cae90f6 HTTP/1.1
 
 ###
 
-POST http://localhost:8000/todos HTTP/1.1
+POST http://localhost:8000/api/v1/todos HTTP/1.1
 content-type: application/json
 
 {
-   "title": "sample"
+   "title": "Build a todo app with Deno",
+   "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos."
 }
+
+###
+
+POST http://localhost:8000/api/v1/todos HTTP/1.1
+content-type: application/json
+
+{
+   "id": "2605debf-60df-4bdc-9f22-c0fb4cae90f6",
+   "title": "Build a todo app with Deno",
+   "completed": false
+}
+
+###
+
+PATCH http://localhost:8000/api/v1/todos/2605debf-60df-4bdc-9f22-c0fb4cae90f6 HTTP/1.1
+content-type: application/json
+
+{
+   "id": "2605debf-60df-4bdc-9f22-c0fb4cae90f6",
+   "title": "Build a todo app with Deno",
+   "completed": false
+}
+
+###
+
+DELETE http://localhost:8000/api/v1/todos/25f4ff21-0ee5-43fd-82e2-44cded37c664 HTTP/1.1
+
+###
+
+DELETE http://localhost:8000/api/v1/todos HTTP/1.1
