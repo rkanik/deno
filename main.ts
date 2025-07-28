@@ -19,8 +19,20 @@ interface UpdateTodoRequest {
   completed?: boolean;
 }
 
-// Initialize Deno KV
-const kv = await Deno.openKv();
+// Initialize Deno KV with error handling
+let kv: Deno.Kv;
+try {
+  kv = await Deno.openKv();
+  console.log("✅ Deno KV initialized successfully");
+} catch (error) {
+  console.error("❌ Failed to initialize Deno KV:", error);
+  console.error(
+    "Make sure to run with --unstable-kv flag or deploy to Deno Deploy with KV enabled"
+  );
+  throw new Error(
+    "KV initialization failed. Please check your deployment configuration."
+  );
+}
 
 // Router setup
 const router = new Router();
