@@ -1,4 +1,6 @@
 GET http://localhost:8000/api/v1/todos HTTP/1.1
+headers:
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwibmFtZSI6IlJLIEFuaWsiLCJlbWFpbCI6InJrYW5pay5tZUBnbWFpbC5jb20iLCJleHAiOjE3NTM3OTEwNjZ9.S2RJx66feA0flcVUGhctuw8bPSqfMkaCeroM9SE1xZA
 
 ###
 
@@ -8,10 +10,11 @@ GET http://localhost:8000/api/v1/todos/2605debf-60df-4bdc-9f22-c0fb4cae90f6 HTTP
 
 POST http://localhost:8000/api/v1/todos HTTP/1.1
 content-type: application/json
+headers:
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwibmFtZSI6IlJLIEFuaWsiLCJlbWFpbCI6InJrYW5pay5tZUBnbWFpbC5jb20iLCJleHAiOjE3NTM3OTEwNjZ9.S2RJx66feA0flcVUGhctuw8bPSqfMkaCeroM9SE1xZA
 
 {
-   "title": "Build a todo app with Deno",
-   "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos."
+   "title": "Build a todo app with NextJS"
 }
 
 ###

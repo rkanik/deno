@@ -8,8 +8,12 @@ import { input } from '@/middlewares/input.ts'
 import { res } from '@/utils/res.ts'
 
 export const postUser = defineRoute(input(zPostUser), async (ctx) => {
-	const id = await getId()
 	const data = ctx.state.input as TZPostUser
+	const exists = await kv.get(['users', data.email])
+	if (exists.value) {
+		return res.error('User already exists', 400)
+	}
+	const id = await getId()
 	const password = await hashWithSHA256(data.password)
 	const user: TUser = {
 		id,
@@ -18,6 +22,6 @@ export const postUser = defineRoute(input(zPostUser), async (ctx) => {
 		createdAt: new Date(),
 		updatedAt: new Date(),
 	}
-	await kv.set(['users', id], user)
+	await kv.set(['users', data.email], user)
 	return res.success({ user })
 })

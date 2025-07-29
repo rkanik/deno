@@ -1,18 +1,17 @@
-import { Context } from "oak";
-import { kv } from "@/kv.ts";
+import { kv } from '@/kv.ts'
+import { defineRoute } from '@/utils/defineRoute.ts'
+import { auth } from '@/middlewares/auth.ts'
+import { res } from '@/utils/res.ts'
+import { Key } from '@/utils/key.ts'
 
-export const deleteUsers = async (ctx: Context) => {
-  try {
-    const entries = await kv.list({ prefix: ["users"] });
-    for await (const entry of entries) {
-      await kv.delete(entry.key);
-    }
-    ctx.response.status = 200;
-    ctx.response.body = { message: "Users deleted successfully" };
-  } catch (error) {
-    ctx.response.status = 500;
-    ctx.response.body = {
-      error: error instanceof Error ? error.message : "Internal server error",
-    };
-  }
-};
+export const deleteUsers = defineRoute(auth, async () => {
+	const entries = kv.list({
+		prefix: Key.users(),
+	})
+	for await (const entry of entries) {
+		await kv.delete(entry.key)
+	}
+	return res.success({
+		message: 'Users deleted successfully',
+	})
+})

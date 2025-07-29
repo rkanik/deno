@@ -1,31 +1,26 @@
-import { Context } from "oak";
-import { kv } from "@/kv.ts";
+import { Context } from 'oak'
+import { kv } from '@/kv.ts'
+import { defineRoute } from '@/utils/defineRoute.ts'
+import { auth } from '@/middlewares/auth.ts'
+import { res } from '@/utils/res.ts'
+import { Key } from '@/utils/key.ts'
 
-export const deleteTodoById = async (ctx: Context) => {
-  try {
-    const id = (ctx as any).params.id;
-    if (!id) {
-      ctx.response.status = 400;
-      ctx.response.body = {
-        error: "Todo ID is required",
-      };
-      return;
-    }
+export const deleteTodoById = defineRoute(auth, async (ctx: Context) => {
+	// deno-lint-ignore no-explicit-any
+	const id = (ctx as any).params.id
+	if (!id) {
+		return res.error('Todo ID is required', 400)
+	}
 
-    const todo = await kv.get(["todos", id]);
+	const key = Key.todo(ctx.state.user.id, id)
+	const todo = await kv.get(key)
 
-    if (!todo.value) {
-      ctx.response.status = 404;
-      ctx.response.body = { error: "Todo not found" };
-      return;
-    }
+	if (!todo.value) {
+		return res.notFound('Todo not found')
+	}
 
-    await kv.delete(["todos", id]);
-
-    ctx.response.status = 204;
-  } catch (error) {
-    console.error("Error deleting todo:", error);
-    ctx.response.status = 500;
-    ctx.response.body = { error: "Internal server error" };
-  }
-};
+	await kv.delete(key)
+	return res.success({
+		message: 'Todo deleted successfully',
+	})
+})
