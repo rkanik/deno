@@ -1,8 +1,8 @@
-GET https://rkanik.deno.dev/api/v1/users HTTP/1.1
+GET http://localhost:8000/api/v1/users HTTP/1.1
 
 ###
 
-POST https://rkanik.deno.dev/api/v1/users HTTP/1.1
+POST http://localhost:8000/api/v1/users HTTP/1.1
 content-type: application/json
 
 {
@@ -13,4 +13,4 @@ content-type: application/json
 
 ###
 
-DELETE https://rkanik.deno.dev/api/v1/users HTTP/1.1
+DELETE http://localhost:8000/api/v1/users HTTP/1.1
