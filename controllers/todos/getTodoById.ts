@@ -1,30 +1,21 @@
-import { Context } from "oak";
-import { kv } from "@/kv.ts";
+import { Context } from 'oak'
+import { kv } from '@/kv.ts'
+import { defineRoute } from '@/utils/defineRoute.ts'
+import { auth } from '@/middlewares/auth.ts'
+import { res } from '@/utils/res.ts'
+import { Key } from '@/utils/key.ts'
 
-export const getTodoById = async (ctx: Context) => {
-  try {
-    const id = (ctx as any).params.id;
-    if (!id) {
-      ctx.response.status = 400;
-      ctx.response.body = {
-        error: "Todo ID is required",
-      };
-      return;
-    }
+export const getTodoById = defineRoute(auth, async (ctx: Context) => {
+	// deno-lint-ignore no-explicit-any
+	const id = (ctx as any).params.id
+	if (!id) {
+		return res.error('Todo ID is required', 400)
+	}
 
-    const todo = await kv.get(["todos", id]);
+	const todo = await kv.get(Key.todo(ctx.state.user.id, id))
+	if (!todo.value) {
+		return res.error('Todo not found', 404)
+	}
 
-    if (!todo.value) {
-      ctx.response.status = 404;
-      ctx.response.body = { error: "Todo not found" };
-      return;
-    }
-
-    ctx.response.body = todo.value;
-    ctx.response.status = 200;
-  } catch (error) {
-    console.error("Error fetching todo:", error);
-    ctx.response.status = 500;
-    ctx.response.body = { error: "Internal server error" };
-  }
-};
+	return res.success(todo.value)
+})
